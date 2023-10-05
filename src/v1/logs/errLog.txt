@@ -1,0 +1,21 @@
+20230615	00:00:59	8934257a-c680-41f7-9765-d6d4e4a058ba	Error: Not allowed by CORS
+20230615	00:02:00	d4b59086-e0a3-4338-9a4a-cb5658460d96	Error: Not allowed by CORS
+20230617	00:45:44	8e0093d2-bebb-4e71-9d6f-df70f3372e99	ReferenceError: token is not defined
+20230617	00:46:30	74fe5d3e-d629-4a5f-97a6-14377c86caa7	ReferenceError: token is not defined
+20230617	00:47:28	c3c6132f-277c-4b56-883d-285d39e5071a	ReferenceError: token is not defined
+20230617	00:53:22	0232deb3-230d-416c-9982-0c07b3713cbe	TypeError: Cannot read properties of undefined (reading 'env')
+20230617	00:53:56	02ba0a5a-4f5d-44c8-b5c7-f0785855edb0	TypeError: Cannot read properties of undefined (reading 'email')
+20230617	00:54:51	52aba29c-07f2-411a-92cc-c3fd1de7c40d	TypeError: Cannot read properties of undefined (reading 'email')
+20230620	00:56:56	ee75da16-653b-43c0-987c-ec63245ef9d7	SyntaxError: Unexpected string in JSON at position 29
+20230623	00:02:37	ba4978dc-c14f-4652-bc6d-f6a4a598415b	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:52:36	0436f86d-c1c6-4f35-9755-4f48b6989ac0	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:02	70611d3f-2923-4319-9547-d6ab0c72f106	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:08	3024523e-17ed-4487-ad03-4fe47c5db7cd	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:13	43f8fdf2-f124-4814-815d-94d7b5475c50	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:18	4c0c9456-164e-47c8-9225-c86b94abe83b	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:29	c65ca0cf-3b16-4131-a97d-a8fdd2fa1795	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230629	22:53:39	6ea0a31e-b1a3-40df-a7f7-a13c78442acb	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20230716	22:59:18	669c0402-2ac0-4b0d-a3b5-4afa9a106bc9	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\nodejs_jwt_auth-main\src\views\404.html'
+20231005	23:17:58	6b73cb1f-1148-4e7d-8114-ab35faa037db	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\aperi-backend\src\views\404.html'
+20231005	23:17:58	7a7e015e-1f35-44a5-abe7-c6ce18a16509	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\aperi-backend\src\views\404.html'
+20231005	23:18:22	9e6ae794-a23c-44c2-b430-71c9d682295d	Error: ENOENT: no such file or directory, stat 'C:\Users\ASUS\Documents\GitHub\aperi-backend\src\views\404.html'
