@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const corsOptions = require('./v1/config/corsOptions');
@@ -35,8 +36,24 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, '/public')));
 
 // routes
-const v1RootRouter = require('./v1/api/root');
-app.use('/v1', v1RootRouter);
+//const v1RootRouter = require('./v1/api/root');
+// const v1RootRouter = require('./v1/api/locations/employees/routes');
+// app.use('/v1', v1RootRouter);
+
+const loadRoutes = (dir) => {
+  fs.readdirSync(dir).forEach((file) => {
+    const fullPath = path.join(dir, file);
+    if (fs.lstatSync(fullPath).isDirectory()) {
+      loadRoutes(fullPath); // Recursively load subdirectories
+    } else if (file.endsWith('index.js')) {
+      let relativePath = path.relative(__dirname, fullPath);
+      const routePath =
+        '/' + relativePath.replace(/\\/g, '/').replace('index.js', '');
+      app.use(routePath, require(fullPath));
+    }
+  });
+};
+loadRoutes(path.join(__dirname, 'v2/api'));
 
 // app.use('/register', require('./v1/api/tenants/routes'));
 // app.use('/register2', require('./v1/api/tenants_mysql/routes'));
@@ -55,16 +72,16 @@ app.use('/v1', v1RootRouter);
 // app.use('/employees', require('../routes/api/employees'));
 // app.use('/users', require('../routes/api/users'));
 
-app.all('*', (req, res) => {
-  res.status(404);
-  if (req.accepts('html')) {
-    res.sendFile(path.join(__dirname, 'views', '404.html'));
-  } else if (req.accepts('json')) {
-    res.json({ error: '404 Not Found' });
-  } else {
-    res.type('txt').send('404 Not Found');
-  }
-});
+// app.all('*', (req, res) => {
+//   res.status(404);
+//   if (req.accepts('html')) {
+//     res.sendFile(path.join(__dirname, 'views', '404.html'));
+//   } else if (req.accepts('json')) {
+//     res.json({ error: '404 Not Found' });
+//   } else {
+//     res.type('txt').send('404 Not Found');
+//   }
+// });
 
 app.use(errorHandler);
 
