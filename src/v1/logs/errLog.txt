@@ -54,3 +54,4 @@
 20241010	15:14:54	02810292-2400-4593-9560-80087a4fb10e	Error: ENOENT: no such file or directory, stat 'C:\Users\Admin\Documents\GitHub\aperi-backend\src\v1\views\index.html'
 20241011	02:04:29	54abb1ee-313a-4b43-8e60-aa3895b51f90	SyntaxError: Unexpected token å in JSON at position 51
 20241011	02:04:32	961c2673-1d0f-462f-b6e7-d85b84aabd79	SyntaxError: Unexpected token å in JSON at position 51
+20241012	01:09:57	9e02107b-296f-4cdd-873c-acd67eb1f6cf	SyntaxError: Unexpected string in JSON at position 34

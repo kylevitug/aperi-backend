@@ -4167,3 +4167,13 @@
 20241012	00:41:18	9760a580-679e-498d-a514-7bcb90842291	POST	undefined	/v2/api/bir-permits
 20241012	00:43:37	3de30b8e-5e24-489e-92bf-3886de9421b4	PUT	undefined	/v2/api/bir-permits
 20241012	00:44:59	e1448940-2b19-4bd7-abbf-7f386b99bae4	DELETE	undefined	/v2/api/bir-permits
+20241012	01:07:17	f893d30c-4f02-414a-8146-b753f440c599	GET	undefined	/v2/api/bir-permit-types
+20241012	01:07:42	762013ee-97d6-43d4-a03e-64c12b0faabe	GET	undefined	/v2/api/bir-permit-types
+20241012	01:08:16	c344383d-eb9e-4062-a3d3-e23d99ac74a7	GET	undefined	/v2/api/bir-permit-types
+20241012	01:08:29	2599cdb3-462a-4011-bbfe-ae65473f743f	POST	undefined	/v2/api/bir-permit-types
+20241012	01:08:54	3ac9a832-7a45-4dcc-89de-b9eeba172b77	POST	undefined	/v2/api/bir-permit-types
+20241012	01:09:35	5fbb60e3-066b-4cb8-b4a0-b4b1248ecc02	PUT	undefined	/v2/api/bir-permit-types
+20241012	01:09:57	c716f140-187b-453f-8e7e-667445a11497	PUT	undefined	/v2/api/bir-permit-types
+20241012	01:10:05	8e4e2ffd-4b6e-494c-acf7-5de90273ee85	PUT	undefined	/v2/api/bir-permit-types
+20241012	01:10:17	5dbc82c9-901c-4714-8671-851da863b24d	PUT	undefined	/v2/api/bir-permit-types
+20241012	01:10:36	11dc2d6b-4f1b-4681-9f87-c1bcd5a25e3a	DELETE	undefined	/v2/api/bir-permit-types
