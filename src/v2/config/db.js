@@ -33,6 +33,8 @@ const connectDbByServerId = async (serverId) => {
       port: process.env.MYSQL_PORT,
       password: process.env.MYSQL_PASS,
       Promise: bluebird,
+      timezone: 'local',
+      dateStrings: true,
     });
   } catch (err) {
     console.error(err);
