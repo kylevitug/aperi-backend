@@ -6543,3 +6543,13 @@
 20241016	17:40:57	e3042c44-3df0-4c5e-93ba-b44df0227c64	POST	undefined	/v2/api/purchaseheader-autoencoder-headers
 20241016	17:46:07	df79144c-7663-448a-8bb0-00d8a343bdee	POST	undefined	/v2/api/purchaseheader-autoencoder-headers
 20241016	17:50:49	8f70f41f-67c0-4a62-8863-349efec29bb8	POST	undefined	/v2/api/purchaseheader-autoencoder-headers
+20241016	22:48:38	4ffb7813-0b1c-41d7-97fa-d117379a2470	GET	undefined	/v2/api/bir-permits
+20241016	22:59:21	7b53a312-c44b-484d-af7e-7d2e5b09f958	GET	undefined	/v2/api/bir-permits
+20241016	23:12:20	81c55d9f-4373-4933-b380-165e3926b999	GET	undefined	/v2/api/bir-permits
+20241016	23:57:31	de771daf-e986-4347-8a87-48c9f96c2071	GET	http://localhost:5173	/documents
+20241017	00:07:12	78c81a49-dd77-477a-8d00-768d273ba805	OPTIONS	http://localhost:5173	/logout
+20241017	00:07:12	0fb45870-56a1-4fb4-8587-53c6106e2ed3	POST	http://localhost:5173	/logout
+20241017	00:16:02	680cfc99-d3f9-4040-83be-4d0f2550cf8e	OPTIONS	http://localhost:5173	/logout
+20241017	00:16:02	56c5f6ce-3628-4e81-b5da-6c79e6e3862c	POST	http://localhost:5173	/logout
+20241017	00:21:29	9a2ff642-ca2d-4960-8441-1a7bfb6a59d5	OPTIONS	http://localhost:5173	/logout
+20241017	00:21:29	4706696c-4736-4c89-8af2-7259e2b5955c	POST	http://localhost:5173	/logout
