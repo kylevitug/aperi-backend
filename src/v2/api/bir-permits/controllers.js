@@ -23,7 +23,9 @@ const createBirPermit = async (req, res) => {
     'iscancelled',
     'isactivedb',
   ];
-  const missingFields = requiredFields.filter((field) => !req.body[field]);
+  const missingFields = requiredFields.filter((field) => 
+    req.body[field] === undefined
+  );
 
   if (missingFields.length) {
     return res.status(404).json({
