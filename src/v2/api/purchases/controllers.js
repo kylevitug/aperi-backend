@@ -1,7 +1,6 @@
 const services = require('./services');
 
 const getLastThreeByPrincipalName = async (req, res) => {
-  console.log(req.query);
   const { serverId, principalName } = req.query;
   if (!serverId || !principalName) {
     return res.status(400).json({ error: 'Missing required parameters' });
@@ -14,7 +13,6 @@ const getLastThreeByPrincipalName = async (req, res) => {
 };
 
 const getLastPurchaseByPrincipalNameByServerId = async (req, res) => {
-  console.log(req.query); 
   const { serverId, principalName } = req.query;
   if (!serverId || !principalName) {
     return res.status(400).json({ error: 'Missing required parameters' });
