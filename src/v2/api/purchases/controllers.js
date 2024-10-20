@@ -14,6 +14,8 @@ const getLastThreeByPrincipalName = async (req, res) => {
 
 const getLastPurchaseByPrincipalNameByServerId = async (req, res) => {
   const { serverId, principalName } = req.query;
+  console.log('serverId', serverId);
+  console.log('principalName', principalName);  
   if (!serverId || !principalName) {
     return res.status(400).json({ error: 'Missing required parameters' });
   }
