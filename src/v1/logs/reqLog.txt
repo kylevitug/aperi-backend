@@ -6555,3 +6555,5 @@
 20241017	00:21:29	4706696c-4736-4c89-8af2-7259e2b5955c	POST	http://localhost:5173	/logout
 20241017	16:09:02	aadf9c30-9250-4cd1-85ea-970120446cdb	OPTIONS	http://localhost:5175	/logout
 20241017	16:09:02	c8f6d808-4cbb-44d8-ba6a-cbabebfdc304	POST	http://localhost:5175	/logout
+20241020	22:25:29	e2cbb9fc-dfe2-4aeb-82fb-67a8a8e3602d	GET	undefined	/v2/api/purchases/getLastPurchaseByPrincipalNameByServerId?serverId=1&principalName=Metro%20-%20Santen
+20241020	22:26:05	9cc18893-c108-4443-ad7f-8c1dac240256	GET	undefined	/v2/api/purchases/getLastPurchaseByPrincipalNameByServerId?serverId=1&principalName=Zuellig%20-%20Servier
