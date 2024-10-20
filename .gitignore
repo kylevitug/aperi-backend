@@ -1,3 +1,5 @@
 node_modules
 .env
 update-aperi-backend.sh
+errLog.txt
+reqLog.txt
