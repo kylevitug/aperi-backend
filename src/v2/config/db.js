@@ -22,11 +22,25 @@ const connectMasterDb = async () => {
 
 const connectDbByServerId = async (serverId) => {
   const qry = `SELECT servers.serverip FROM servers WHERE servers.id = ?`;
-  let masterDb = await connectMasterDb();
-  const [rows, fields] = await masterDb.execute(qry, [serverId]);
-  await masterDb.end();
+  let masterDb;
+
   try {
-    db = await mysql.createConnection({
+    // Connect to the master database
+    masterDb = await connectMasterDb();
+    
+    // Execute the query to get the server IP
+    const [rows] = await masterDb.execute(qry, [serverId]);
+    
+    // Check if a result was found
+    if (rows.length === 0) {
+      throw new Error(`No server found with ID: ${serverId}`);
+    }
+
+    // Close the master DB connection
+    await masterDb.end();
+
+    // Now, connect to the specific server using the found server IP
+    const db = await mysql.createConnection({
       host: rows[0].serverip,
       user: process.env.MYSQL_USER,
       database: process.env.MYSQL_DB,
@@ -36,11 +50,43 @@ const connectDbByServerId = async (serverId) => {
       timezone: 'local',
       dateStrings: true,
     });
+
+    return db;
+
   } catch (err) {
-    console.error(err);
+    console.error('Error connecting to database by server ID:', err);
+    
+    // Ensure masterDb is closed even in case of an error
+    if (masterDb) {
+      await masterDb.end();
+    }
+    
+    // Re-throw the error to handle it upstream or return null/undefined as per your logic
+    // throw err;
   }
-  return db;
 };
+
+// const connectDbByServerId = async (serverId) => {
+//   const qry = `SELECT servers.serverip FROM servers WHERE servers.id = ?`;
+//   let masterDb = await connectMasterDb();
+//   const [rows, fields] = await masterDb.execute(qry, [serverId]);
+//   await masterDb.end();
+//   try {
+//     db = await mysql.createConnection({
+//       host: rows[0].serverip,
+//       user: process.env.MYSQL_USER,
+//       database: process.env.MYSQL_DB,
+//       port: process.env.MYSQL_PORT,
+//       password: process.env.MYSQL_PASS,
+//       Promise: bluebird,
+//       timezone: 'local',
+//       dateStrings: true,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+//   return db;
+// };
 
 // async function getDatabaseConnection(hostIp) {
 //   return mysql.createPool({
