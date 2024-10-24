@@ -122,7 +122,7 @@ const getAllPurchaseHeaders = async (filters = {}) => {
     }
 
     // Execute the query
-    const db = await connectMasterDb();
+    const db = await connectDbByServerId();
     const [rows] = await db.execute(sql, values);
     await db.end();
 
