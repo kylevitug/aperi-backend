@@ -1,4 +1,4 @@
-const { connectDbByServerId } = require('../../config/db');
+const { connectMasterDb, connectDbByServerId } = require('../../config/db');
 
 const getLastThreeByPrincipalName = async (serverId, principalName) => {
   try {
