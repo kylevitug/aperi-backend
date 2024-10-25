@@ -6557,3 +6557,9 @@
 20241017	16:09:02	c8f6d808-4cbb-44d8-ba6a-cbabebfdc304	POST	http://localhost:5175	/logout
 20241020	22:25:29	e2cbb9fc-dfe2-4aeb-82fb-67a8a8e3602d	GET	undefined	/v2/api/purchases/getLastPurchaseByPrincipalNameByServerId?serverId=1&principalName=Metro%20-%20Santen
 20241020	22:26:05	9cc18893-c108-4443-ad7f-8c1dac240256	GET	undefined	/v2/api/purchases/getLastPurchaseByPrincipalNameByServerId?serverId=1&principalName=Zuellig%20-%20Servier
+20241025	00:40:00	417039b2-78c9-44f9-a03f-f2ddf7439690	GET	undefined	/v2/api/purchases
+20241025	00:46:09	97148cdf-ac54-4dbb-acd9-1dc172c27a5b	GET	undefined	/v2/api/servers
+20241025	00:46:30	99f9755a-cf8e-4355-be2c-9a20ab5ce7c6	GET	undefined	/v2/api/servers
+20241025	00:46:42	54629e7d-7041-43db-ad37-0914e8459b28	GET	undefined	/v2/api/servers
+20241025	00:46:48	7254bb75-2322-4caf-9181-94b67b882eb9	GET	undefined	/v2/api/purchases
+20241025	00:47:43	9a41d8ef-056a-46d8-bacf-493134681e28	GET	undefined	/v2/api/purchases
