@@ -31,7 +31,10 @@ const getLastThreeByPrincipalName = async (serverId, principalName) => {
   }
 };
 
-const getLastPurchaseByPrincipalNameByServerId = async (serverId, principalName) => {
+const getLastPurchaseByPrincipalNameByServerId = async (
+  serverId,
+  principalName
+) => {
   try {
     const qry = `SELECT 
         purchasedate
@@ -60,7 +63,7 @@ const getLastPurchaseByPrincipalNameByServerId = async (serverId, principalName)
   } catch (error) {
     console.error('Error ', error);
   }
-}
+};
 
 const getAllPurchaseHeaders = async (filters = {}) => {
   try {
@@ -72,10 +75,18 @@ const getAllPurchaseHeaders = async (filters = {}) => {
       sql += ` AND purchaseheaderid = ?`;
       values.push(filters.purchaseheaderid);
     }
-    if (filters.purchasedate) {
-      sql += ` AND purchasedate = ?`;
-      values.push(filters.purchasedate);
+    // Handle purchasedate with start and end date range
+    if (filters.purchasedate_start && filters.purchasedate_end) {
+      sql += ` AND purchasedate BETWEEN ? AND ?`;
+      values.push(filters.purchasedate_start, filters.purchasedate_end);
+    } else if (filters.purchasedate_start) {
+      sql += ` AND purchasedate >= ?`;
+      values.push(filters.purchasedate_start);
+    } else if (filters.purchasedate_end) {
+      sql += ` AND purchasedate <= ?`;
+      values.push(filters.purchasedate_end);
     }
+
     if (filters.supplierid) {
       sql += ` AND supplierid = ?`;
       values.push(filters.supplierid);
@@ -133,9 +144,8 @@ const getAllPurchaseHeaders = async (filters = {}) => {
   }
 };
 
-
 module.exports = {
   getLastThreeByPrincipalName,
   getLastPurchaseByPrincipalNameByServerId,
-  getAllPurchaseHeaders
+  getAllPurchaseHeaders,
 };
