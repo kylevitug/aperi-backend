@@ -75,7 +75,6 @@ const getAllPurchaseHeaders = async (filters = {}) => {
       sql += ` AND purchaseheaderid = ?`;
       values.push(filters.purchaseheaderid);
     }
-    // Handle purchasedate with start and end date range
     if (filters.purchasedate_start && filters.purchasedate_end) {
       sql += ` AND purchasedate BETWEEN ? AND ?`;
       values.push(filters.purchasedate_start, filters.purchasedate_end);
@@ -132,6 +131,16 @@ const getAllPurchaseHeaders = async (filters = {}) => {
       values.push(filters.billedstatus);
     }
 
+    // Add pagination
+    if (filters.limit) {
+      sql += ` LIMIT ?`;
+      values.push(parseInt(filters.limit, 10));
+    }
+    if (filters.offset) {
+      sql += ` OFFSET ?`;
+      values.push(parseInt(filters.offset, 10));
+    }
+
     // Execute the query
     const db = await connectDbByServerId(filters.serverId);
     const [rows] = await db.execute(sql, values);
@@ -143,6 +152,7 @@ const getAllPurchaseHeaders = async (filters = {}) => {
     throw error;
   }
 };
+
 
 module.exports = {
   getLastThreeByPrincipalName,
