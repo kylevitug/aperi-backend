@@ -4,3 +4,4 @@ update-aperi-backend.sh
 errLog.txt
 reqLog.txt
 src/v1/logs/reqLog.txt
+update-backend.bat
