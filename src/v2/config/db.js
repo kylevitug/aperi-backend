@@ -27,10 +27,10 @@ const connectDbByServerId = async (serverId) => {
   try {
     // Connect to the master database
     masterDb = await connectMasterDb();
-    
+
     // Execute the query to get the server IP
     const [rows] = await masterDb.execute(qry, [serverId]);
-    
+
     // Check if a result was found
     if (rows.length === 0) {
       throw new Error(`No server found with ID: ${serverId}`);
@@ -52,15 +52,59 @@ const connectDbByServerId = async (serverId) => {
     });
 
     return db;
-
   } catch (err) {
     console.error('Error connecting to database by server ID:', err);
-    
+
     // Ensure masterDb is closed even in case of an error
     if (masterDb) {
       await masterDb.end();
     }
-    
+
+    // Re-throw the error to handle it upstream or return null/undefined as per your logic
+    // throw err;
+  }
+};
+
+const connectByBackupDb = async (serverId) => {
+  const qry = `SELECT servers.servername FROM servers WHERE servers.id = ?`;
+  let masterDb;
+
+  try {
+    // Connect to the master database
+    masterDb = await connectMasterDb();
+
+    // Execute the query to get the server IP
+    const [rows] = await masterDb.execute(qry, [serverId]);
+
+    // Check if a result was found
+    if (rows.length === 0) {
+      throw new Error(`No server found with ID: ${serverId}`);
+    }
+
+    // Close the master DB connection
+    await masterDb.end();
+    const backupDatabaseIp = '25.79.55.64';
+    // Now, connect to the specific server using the found server IP
+    const db = await mysql.createConnection({
+      host: backupDatabaseIp,
+      user: process.env.MYSQL_USER,
+      database: rows[0].servername,
+      port: process.env.MYSQL_PORT,
+      password: process.env.MYSQL_PASS,
+      Promise: bluebird,
+      timezone: 'local',
+      dateStrings: true,
+    });
+
+    return db;
+  } catch (err) {
+    console.error('Error connecting to database by server ID:', err);
+
+    // Ensure masterDb is closed even in case of an error
+    if (masterDb) {
+      await masterDb.end();
+    }
+
     // Re-throw the error to handle it upstream or return null/undefined as per your logic
     // throw err;
   }
@@ -126,4 +170,5 @@ const connectDbByServerId = async (serverId) => {
 module.exports = {
   connectMasterDb,
   connectDbByServerId,
+  connectByBackupDb,
 };

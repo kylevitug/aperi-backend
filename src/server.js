@@ -5,16 +5,30 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const corsOptions = require('./v1/config/corsOptions');
-const { logger } = require('./v1/middleware/logEvents');
+// const { logger } = require('./v1/middleware/logEvents');
 const errorHandler = require('./v1/middleware/errorHandler');
 const verifyJWT = require('./v1/middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
 const credentials = require('./v1/middleware/credentials');
+const { scheduleDailyAggregation } = require('./v2/jobs/dailyAggregator');
+// const { aggregateDataDaily } = require('./v2/api/sales-total-summary/services');
+
+// Initialize scheduled jobs
+scheduleDailyAggregation();
+
+// app.get('/test-cron', async (req, res) => {
+//   try {
+//     await aggregateDataDaily();
+//     res.send('Cron job executed successfully');
+//   } catch (error) {
+//     res.status(500).send('Error executing cron job');
+//   }
+// });
 
 const PORT = process.env.PORT || 3500;
 
-// custom middleware logger
-app.use(logger);
+// // custom middleware logger
+// app.use(logger);
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
