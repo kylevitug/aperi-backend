@@ -54,7 +54,7 @@ const getLastPurchaseByPrincipalNameByServerId = async (
         AND purchaseheader.isreceived = 1
         AND suppliers.supplierid = purchaseheader.supplierid
         GROUP BY purchaseheader.purchaseheaderid
-        ORDER BY purchasedate DESC
+        ORDER BY deliverydate DESC
         LIMIT 1`;
     const db = await connectDbByServerId(serverId);
     const [rows, fields] = await db.execute(qry, [principalName]);
@@ -88,7 +88,7 @@ const getLastPurchaseBySupplierNameByServerId = async (
         AND purchaseheader.isreceived = 1
         AND suppliers.supplierid = purchaseheader.supplierid
         GROUP BY purchaseheader.purchaseheaderid
-        ORDER BY purchasedate DESC
+        ORDER BY deliverydate DESC
         LIMIT 1`;
     const db = await connectDbByServerId(serverId);
     const [rows, fields] = await db.execute(qry, [supplierName]);
