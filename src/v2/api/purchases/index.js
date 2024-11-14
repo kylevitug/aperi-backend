@@ -5,8 +5,12 @@ const controller = require('./controllers');
 router
   .route('/getLastThreeByPrincipalName')
   .get(controller.getLastThreeByPrincipalName);
-router.route('/getLastPurchaseByPrincipalNameByServerId').get(controller.getLastPurchaseByPrincipalNameByServerId);
-
+router
+  .route('/getLastPurchaseByPrincipalNameByServerId')
+  .get(controller.getLastPurchaseByPrincipalNameByServerId);
+router
+  .route('/getLastPurchaseBySupplierNameByServerId')
+  .get(controller.getLastPurchaseBySupplierNameByServerId);
 router.route('/').get(controller.getAllPurchaseHeaders);
 router.route('/').post(controller.createPurchaseHeader);
 router.route('/').put(controller.updatePurchaseHeaderById);

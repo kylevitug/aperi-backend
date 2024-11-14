@@ -65,6 +65,40 @@ const getLastPurchaseByPrincipalNameByServerId = async (
   }
 };
 
+const getLastPurchaseBySupplierNameByServerId = async (
+  serverId,
+  supplierName
+) => {
+  try {
+    const qry = `SELECT 
+        deliverydate
+        FROM \`purchaseline\`,
+        \`purchaseheader\`,
+        suppliers
+        WHERE purchaseheader.purchaseheaderid = purchaseline.purchaseheaderid
+        AND purchaseline.productid IN (
+            SELECT products.productid
+            FROM products
+            WHERE products.supplierid = (
+                SELECT supplierid
+                FROM \`suppliers\`
+                WHERE name = ?
+            )
+        )
+        AND purchaseheader.isreceived = 1
+        AND suppliers.supplierid = purchaseheader.supplierid
+        GROUP BY purchaseheader.purchaseheaderid
+        ORDER BY purchasedate DESC
+        LIMIT 1`;
+    const db = await connectDbByServerId(serverId);
+    const [rows, fields] = await db.execute(qry, [supplierName]);
+    await db.end();
+    return rows;
+  } catch (error) {
+    console.error('Error ', error);
+  }
+};
+
 const getAllPurchaseHeaders = async (filters = {}) => {
   try {
     let sql = `SELECT * FROM purchaseheader WHERE 1=1`; // Base query
@@ -143,9 +177,9 @@ const getAllPurchaseHeaders = async (filters = {}) => {
   }
 };
 
-
 module.exports = {
   getLastThreeByPrincipalName,
   getLastPurchaseByPrincipalNameByServerId,
   getAllPurchaseHeaders,
+  getLastPurchaseBySupplierNameByServerId,
 };
