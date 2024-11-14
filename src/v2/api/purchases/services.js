@@ -37,7 +37,7 @@ const getLastPurchaseByPrincipalNameByServerId = async (
 ) => {
   try {
     const qry = `SELECT 
-        purchasedate
+        deliverydate
         FROM \`purchaseline\`,
         \`purchaseheader\`,
         suppliers
