@@ -21,7 +21,8 @@ const connectMasterDb = async () => {
 };
 
 const connectDbByServerId = async (serverId) => {
-  const qry = `SELECT servers.serverip FROM servers WHERE servers.id = ?`;
+  //const qry = `SELECT servers.serverip FROM servers WHERE servers.id = ?`;
+  const qry = `SELECT zerotier_ip AS serverip FROM servers_zerotier WHERE id = ?`;
   let masterDb;
 
   try {
@@ -83,7 +84,8 @@ const connectByBackupDb = async (serverId) => {
 
     // Close the master DB connection
     await masterDb.end();
-    const backupDatabaseIp = '25.79.55.64';
+    //const backupDatabaseIp = '25.79.55.64';
+    const backupDatabaseIp = '10.1.6.235';
     // Now, connect to the specific server using the found server IP
     const db = await mysql.createConnection({
       host: backupDatabaseIp,

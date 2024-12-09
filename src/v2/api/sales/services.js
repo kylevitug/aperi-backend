@@ -1,4 +1,4 @@
-const { connectDbByServerId } = require('../../config/db');
+const { connectDbByServerId, connectByBackupDb } = require('../../config/db');
 
 const getAllSales = async (req, res) => {
   let { productid, serverid, startdate, enddate } = req.body;
@@ -26,31 +26,88 @@ const getAllSales = async (req, res) => {
 };
 
 const getAllSalesByProductGroupNameByDateByServerId = async (req, res) => {
-  let { productgroupid, serverid, startdate, enddate } = req.body;
+  let { productGroupName, serverId, startDate } = req.query;
   try {
     const sql = `
-      SELECT
-        DATE(saleheader.datecreated) AS datecreated,
-        SUM(saleline.total) AS total
-      FROM saleheader, saleline, item
-      WHERE saleheader.saleheaderid = saleline.saleheaderid
-      AND saleline.itemid = item.itemid
-      AND item.productgroupid = ?
-      AND DATE(saleheader.datecreated) BETWEEN ? AND ?
-      GROUP BY DATE(saleheader.datecreated)`;
-    const db = await connectDbByServerId(serverid);
+      SELECT 
+        CONCAT(
+          YEAR(t.datecreated), 
+          '-', 
+          LPAD(
+            MONTH(t.datecreated), 
+            2, 
+            '0'
+          )
+        ) AS yearmonth, 
+        SUM(t.tot) AS total_amount 
+      FROM 
+        (
+          -- Sales transactions
+          SELECT 
+            saleheader.datecreated, 
+            SUM(saleline.amount) AS tot 
+          FROM 
+            saleheader 
+            INNER JOIN saleline ON saleheader.saleheaderid = saleline.saleheaderid 
+          WHERE 
+            saleheader.paymentmodeid NOT IN (9, 10) 
+            AND saleline.itemid IN (
+              SELECT 
+                productgroupsitems.productid 
+              FROM 
+                productgroups 
+                INNER JOIN productgroupsitems ON productgroups.id = productgroupsitems.productgroupid 
+              WHERE 
+                productgroups.name LIKE ?
+            ) 
+            AND saleheader.datecreated BETWEEN ?
+            AND CURDATE() 
+          GROUP BY 
+            saleheader.datecreated 
+          UNION ALL 
+            -- Return transactions (as negative amounts)
+          SELECT 
+            returnheader.datecreated, 
+            SUM(returnline.amount) * -1.0 AS tot 
+          FROM 
+            returnheader 
+            INNER JOIN returnline ON returnheader.returnheaderid = returnline.returnheaderid 
+          WHERE 
+            returnheader.paymentmodeid NOT IN (9, 10) 
+            AND returnline.itemid IN (
+              SELECT 
+                productgroupsitems.productid 
+              FROM 
+                productgroups 
+                INNER JOIN productgroupsitems ON productgroups.id = productgroupsitems.productgroupid 
+              WHERE 
+                productgroups.name LIKE ?
+            ) 
+            AND returnheader.datecreated BETWEEN ?
+            AND CURDATE() 
+          GROUP BY 
+            returnheader.datecreated
+        ) AS t 
+      GROUP BY 
+        yearmonth
+      ORDER BY 
+        yearmonth`;
+    console.log(serverId);
+    const db = await connectByBackupDb(serverId);
     const [rows, fields] = await db.execute(sql, [
-      productgroupid,
-      startdate,
-      enddate,
+      productGroupName,
+      startDate,
+      productGroupName,
+      startDate,
     ]);
     await db.end();
     return rows;
   } catch (error) {
     console.error('Error ', error);
   }
-}
+};
 
 module.exports = {
   getAllSales,
+  getAllSalesByProductGroupNameByDateByServerId,
 };
