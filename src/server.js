@@ -11,6 +11,7 @@ const verifyJWT = require('./v1/middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
 const credentials = require('./v1/middleware/credentials');
 const { scheduleDailyAggregation } = require('./v2/jobs/dailyAggregator');
+const PQueue = require('p-queue');
 // const { aggregateDataDaily } = require('./v2/api/sales-total-summary/services');
 
 // Initialize scheduled jobs
@@ -48,6 +49,28 @@ app.use(cookieParser());
 
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
+
+// Create a PQueue instance to limit concurrent API requests
+const apiQueue = new PQueue({ concurrency: 30 }); // Limit to 10 concurrent requests
+
+// Function to queue API requests
+const queueMiddleware = async (req, res, next) => {
+  try {
+    await apiQueue.add(() => processRequest(req, res, next));
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: 'An error occurred while processing your request.' });
+  }
+};
+
+// Function to process each request (custom logic can go here)
+const processRequest = async (req, res, next) => {
+  next(); // Pass control to the next middleware or route handler
+};
+
+// Apply the queue middleware to all routes
+app.use(queueMiddleware);
 
 // routes
 //const v1RootRouter = require('./v1/api/root');
