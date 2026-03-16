@@ -5,3 +5,4 @@ errLog.txt
 reqLog.txt
 src/v1/logs/reqLog.txt
 update-backend.bat
+src/v1/logs/errLog.txt
